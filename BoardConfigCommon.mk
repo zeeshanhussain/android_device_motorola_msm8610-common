@@ -29,7 +29,7 @@ BOARD_VENDOR := motorola-qcom
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno302
 TARGET_BOARD_PLATFORM := msm8610
 
-USE_CLANG_PLATFORM_BUILD := true
+USE_CLANG_PLATFORM_BUILD := false
 
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
@@ -55,8 +55,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.bootdevice=msm_sdcc.1 vmalloc=400M
-
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.bootdevice=msm_sdcc.1 vmalloc=400M androidboot.selinux=permissive
 WLAN_MODULES:
 	mkdir -p $(KERNEL_MODULES_OUT)/pronto
 	mv $(KERNEL_MODULES_OUT)/wlan.ko $(KERNEL_MODULES_OUT)/pronto/pronto_wlan.ko
@@ -66,6 +65,11 @@ TARGET_KERNEL_MODULES += WLAN_MODULES
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
+
+# omni tags 
+TARGET_QCOM_AUDIO_VARIANT := caf-msm8974
+TARGET_QCOM_MEDIA_VARIANT := caf-msm8974
+TARGET_QCOM_DISPLAY_VARIANT := caf-msm8974
 
 # GPS
 TARGET_NO_RPC := true
@@ -166,3 +170,17 @@ ifeq ($(HOST_OS),linux)
     endif
   endif
 endif
+
+TARGET_RECOVERY_FSTAB := device/motorola/condor/twrp.fstab
+
+
+# TWRP
+DEVICE_RESOLUTION := 540x960
+TW_TARGET_USES_QCOM_BSP := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_INCLUDE_CRYPTO := true
+TW_SCREEN_BLANK_ON_BOOT := true
+TW_IGNORE_MAJOR_AXIS_0 := true
+BOARD_SUPPRESS_EMMC_WIPE := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
