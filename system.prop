@@ -1,5 +1,10 @@
 # system.prop for msm8610
 
+
+ro.build.fingerprint=motorola/condor_reteu/condor_umts:5.1/LPC23.13-34.8/9:user/release-keys
+ro.product.device=condor
+ro.product.model=Moto E
+
 # ART
 dalvik.vm.dex2oat-flags=--no-watch-dog
 dalvik.vm.dex2oat-swap=false
